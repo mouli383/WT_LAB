@@ -1,7 +1,7 @@
-*{
+/* *{
     margin:0;
     display:block;
-}
+} */
 
 .title{
     text-align:center;
@@ -89,3 +89,16 @@ ul li a{
     border-radius:8px;
     margin-bottom:5px;
 }
+
+.audio{
+    margin-top:20px;
+    margin-bottom:20px;
+    margin-left:200px;
+    margin-right:500px;
+}
+
+.ext-table{
+    border:2px solid balck;
+    border-collapse:collapse;
+}
+
