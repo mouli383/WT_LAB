@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Contact</title>
-    <link rel="stylesheet" href="style.css">
+<title>Contact</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -10,8 +10,8 @@
 
 <main class="content">
 <div class="welcome">
-    <p>Email: library@college.edu</p>
-    <p>Phone: +91 98765 43210</p>
+<p>Email: library@college.edu</p>
+<p>Phone: +91 98765 43210</p>
 </div>
 </main>
 

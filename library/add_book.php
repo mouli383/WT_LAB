@@ -15,12 +15,11 @@ if (isset($_POST['add'])) {
     $msg = "Book added successfully!";
 }
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add Book</title>
-    <link rel="stylesheet" href="style.css">
+<title>Add Book</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -29,11 +28,11 @@ if (isset($_POST['add'])) {
 <main class="content">
 <div class="welcome">
 <form method="post">
-    <input name="book_name" placeholder="Book Name" required><br><br>
-    <input name="author" placeholder="Author" required><br><br>
-    <input name="category" placeholder="Category"><br><br>
-    <input type="number" name="quantity" placeholder="Quantity" required><br><br>
-    <button name="add">Add Book</button>
+<input name="book_name" placeholder="Book Name" required><br><br>
+<input name="author" placeholder="Author" required><br><br>
+<input name="category" placeholder="Category"><br><br>
+<input type="number" name="quantity" placeholder="Quantity" required><br><br>
+<button name="add">Add Book</button>
 </form>
 <p><?= $msg ?></p>
 </div>

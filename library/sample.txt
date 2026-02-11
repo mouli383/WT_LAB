@@ -1,0 +1,3 @@
+Hello PHP File System
+This is a file handling demo.
+Appending using file_put_contents()

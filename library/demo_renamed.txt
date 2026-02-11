@@ -1,0 +1,4 @@
+Hello All!
+This is PHP File Handling Demo.
+New Line Added.
+Locked Write Successful.
