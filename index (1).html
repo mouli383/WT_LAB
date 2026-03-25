@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mouli Samireddi | Data Analyst & Engineer</title>
+
+  <!-- Bootstrap 5.3.2 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --navy: #070d1a;
+      --navy-2: #0d1627;
+      --navy-3: #111e33;
+      --cyan: #00d4ff;
+      --cyan-dim: rgba(0,212,255,0.12);
+      --orange: #ff6b35;
+      --gold: #f5c518;
+      --text-primary: #e8f0fe;
+      --text-muted: #8899b0;
+      --border: rgba(0,212,255,0.18);
+      --card-bg: rgba(13,22,39,0.85);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--navy);
+      color: var(--text-primary);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 3px; }
+
+    /* ── Typography ── */
+    h1,h2,h3,h4,h5 { font-family: 'Syne', sans-serif; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* ── Grid bg ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.035) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    section, nav, footer { position: relative; z-index: 1; }
+
+    /* ── Glowing blob ── */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.12;
+      pointer-events: none;
+    }
+    .blob-1 { width: 500px; height: 500px; background: var(--cyan); top: -150px; right: -100px; }
+    .blob-2 { width: 400px; height: 400px; background: var(--orange); bottom: 0; left: -100px; }
+
+    /* ── Navbar ── */
+    .navbar {
+      background: rgba(7,13,26,0.92) !important;
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.7rem 0;
+    }
+    .navbar-brand {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: var(--cyan) !important;
+      letter-spacing: -0.5px;
+    }
+    .navbar-brand span { color: var(--text-primary); }
+    .nav-link {
+      color: var(--text-muted) !important;
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 0.5rem 0.9rem !important;
+      transition: color 0.2s;
+      letter-spacing: 0.3px;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--cyan) !important; }
+    .navbar-toggler { border-color: var(--border); }
+    .navbar-toggler-icon { filter: invert(0.8); }
+
+    /* ── Section labels ── */
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--cyan);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .section-divider {
+      width: 48px;
+      height: 3px;
+      background: var(--cyan);
+      border-radius: 2px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── Buttons ── */
+    .btn-cyan {
+      background: var(--cyan);
+      color: var(--navy);
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border: none;
+      padding: 0.7rem 1.6rem;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+    }
+    .btn-cyan:hover {
+      background: #fff;
+      color: var(--navy);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,212,255,0.3);
+    }
+    .btn-outline-cyan {
+      background: transparent;
+      color: var(--cyan);
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border: 1.5px solid var(--cyan);
+      padding: 0.68rem 1.6rem;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .btn-outline-cyan:hover {
+      background: var(--cyan-dim);
+      color: var(--cyan);
+      transform: translateY(-2px);
+    }
+
+    /* ── Cards ── */
+    .glass-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      backdrop-filter: blur(12px);
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    }
+    .glass-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0,212,255,0.4);
+      box-shadow: 0 16px 48px rgba(0,212,255,0.1);
+    }
+
+    /* ── Hero ── */
+    #home {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 0 5rem;
+      overflow: hidden;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--cyan);
+      background: var(--cyan-dim);
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.9rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+    }
+    .hero-name {
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -2px;
+    }
+    .hero-name .highlight { color: var(--cyan); }
+    .hero-role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      color: var(--text-muted);
+      margin: 1.2rem 0 2rem;
+    }
+    .hero-role span { color: var(--orange); }
+    .hero-img-wrap {
+      position: relative;
+      display: inline-block;
+    }
+    .hero-img-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--cyan), var(--orange));
+      z-index: 0;
+    }
+    .hero-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, var(--navy) 0%, transparent 60%);
+      border-radius: 18px;
+      z-index: 2;
+    }
+    .hero-img {
+      width: 100%;
+      max-width: 380px;
+      border-radius: 18px;
+      position: relative;
+      z-index: 1;
+      display: block;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .stat-item .num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--cyan);
+      line-height: 1;
+    }
+    .stat-item .lbl {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ── About ── */
+    #about { padding: 6rem 0; }
+    .about-list li {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .about-list li strong { color: var(--text-primary); }
+    .tech-pill {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      padding: 0.28rem 0.75rem;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      color: var(--cyan);
+      background: var(--cyan-dim);
+      margin: 0.2rem;
+    }
+
+    /* ── Skills ── */
+    #skills { padding: 6rem 0; background: var(--navy-2); }
+    .skill-bar-wrap { margin-bottom: 1.2rem; }
+    .skill-label {
+      font-size: 0.8rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.4rem;
+    }
+    .skill-label span:last-child { color: var(--cyan); }
+    .progress {
+      height: 6px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 10px;
+      overflow: visible;
+    }
+    .progress-bar {
+      border-radius: 10px;
+      background: linear-gradient(90deg, var(--cyan), var(--orange));
+      transition: width 1.5s ease;
+      position: relative;
+    }
+    .progress-bar::after {
+      content: '';
+      position: absolute;
+      right: -1px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 8px var(--cyan);
+    }
+    .badge-skill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      padding: 0.35rem 0.8rem;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+      margin: 0.2rem;
+    }
+
+    /* ── Projects ── */
+    #projects { padding: 6rem 0; }
+    .project-card { overflow: hidden; }
+    .project-card .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 3px;
+      background: var(--cyan-dim);
+      color: var(--cyan);
+      border: 1px solid var(--border);
+      margin-right: 0.3rem;
+    }
+    .project-icon {
+      width: 48px; height: 48px;
+      border-radius: 10px;
+      background: var(--cyan-dim);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      color: var(--cyan);
+      margin-bottom: 1rem;
+    }
+
+    /* ── Education/Experience ── */
+    #experience { padding: 6rem 0; background: var(--navy-2); }
+    .table-dark {
+      --bs-table-bg: rgba(13,22,39,0.6);
+      --bs-table-striped-bg: rgba(0,212,255,0.04);
+      --bs-table-border-color: var(--border);
+      font-size: 0.88rem;
+    }
+    .table-dark thead th {
+      background: rgba(0,212,255,0.08);
+      color: var(--cyan);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-color: var(--border);
+    }
+    .list-group-item-exp {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.5rem;
+      border-radius: 8px !important;
+    }
+    .list-group-item-exp .role {
+      font-weight: 700;
+      font-family: 'Syne', sans-serif;
+    }
+    .list-group-item-exp .company { color: var(--cyan); font-size: 0.85rem; }
+    .list-group-item-exp .duration {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* ── Gallery ── */
+    #gallery { padding: 6rem 0; }
+    .carousel-item img {
+      border-radius: 14px;
+      max-height: 420px;
+      object-fit: cover;
+      width: 100%;
+    }
+    .carousel-caption-custom {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(7,13,26,0.95), transparent);
+      padding: 2rem 2rem 1.5rem;
+      border-radius: 0 0 14px 14px;
+      text-align: left;
+    }
+    .carousel-control-prev, .carousel-control-next {
+      width: 48px; height: 48px;
+      top: 50%; transform: translateY(-50%);
+      background: rgba(0,212,255,0.15);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 1;
+    }
+    .carousel-control-prev { left: -24px; }
+    .carousel-control-next { right: -24px; }
+
+    /* ── Interactive / Accordion ── */
+    #interactive { padding: 6rem 0; background: var(--navy-2); }
+    .accordion-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      margin-bottom: 0.5rem;
+      border-radius: 10px !important;
+      overflow: hidden;
+    }
+    .accordion-button {
+      background: transparent;
+      color: var(--text-primary);
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      box-shadow: none;
+    }
+    .accordion-button:not(.collapsed) {
+      background: var(--cyan-dim);
+      color: var(--cyan);
+      box-shadow: none;
+    }
+    .accordion-button::after {
+      filter: invert(1) sepia(1) saturate(5) hue-rotate(160deg);
+    }
+    .accordion-body {
+      background: rgba(7,13,26,0.5);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    /* ── Contact ── */
+    #contact { padding: 6rem 0; }
+    .form-control, .form-select {
+      background: var(--navy-3);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      padding: 0.7rem 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-control:focus, .form-select:focus {
+      background: var(--navy-3);
+      border-color: var(--cyan);
+      color: var(--text-primary);
+      box-shadow: 0 0 0 3px rgba(0,212,255,0.12);
+    }
+    .form-control::placeholder { color: var(--text-muted); }
+    .form-select option { background: var(--navy-2); }
+    .form-label {
+      font-size: 0.8rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+    .form-check-input:checked {
+      background-color: var(--cyan);
+      border-color: var(--cyan);
+    }
+    .form-check-label { font-size: 0.85rem; color: var(--text-muted); }
+    .input-group-text {
+      background: rgba(0,212,255,0.08);
+      border-color: var(--border);
+      color: var(--cyan);
+    }
+
+    /* ── Alert ── */
+    .alert-cyan {
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.3);
+      color: var(--cyan);
+      border-radius: 8px;
+      font-size: 0.88rem;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--navy-2);
+      border-top: 1px solid var(--border);
+      padding: 3rem 0;
+    }
+    .footer-brand {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--cyan);
+    }
+    .social-link {
+      width: 40px; height: 40px;
+      border-radius: 8px;
+      background: var(--navy-3);
+      border: 1px solid var(--border);
+      display: inline-flex; align-items: center; justify-content: center;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .social-link:hover {
+      background: var(--cyan-dim);
+      border-color: var(--cyan);
+      color: var(--cyan);
+      transform: translateY(-2px);
+    }
+
+    /* ── Popover / Tooltip ── */
+    .popover {
+      background: var(--navy-3);
+      border: 1px solid var(--border);
+    }
+    .popover-header {
+      background: var(--cyan-dim);
+      color: var(--cyan);
+      font-family: 'Syne', sans-serif;
+    }
+    .popover-body { color: var(--text-muted); font-size: 0.85rem; }
+
+    /* ── Modal ── */
+    .modal-content {
+      background: var(--navy-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+    .modal-header {
+      border-bottom: 1px solid var(--border);
+    }
+    .modal-footer { border-top: 1px solid var(--border); }
+    .btn-close { filter: invert(1); }
+
+    /* ── Contact info items ── */
+    .contact-info-item {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 0.8rem;
+      transition: border-color 0.2s;
+    }
+    .contact-info-item:hover { border-color: rgba(0,212,255,0.35); }
+    .contact-info-item .icon {
+      width: 40px; height: 40px; border-radius: 8px;
+      background: var(--cyan-dim);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; color: var(--cyan); flex-shrink: 0;
+    }
+    .contact-info-item .info-label { font-size: 0.72rem; color: var(--text-muted); }
+    .contact-info-item .info-val { font-size: 0.9rem; font-weight: 500; }
+
+    /* ── Entrance animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    .anim-1 { animation: fadeUp 0.7s ease both; }
+    .anim-2 { animation: fadeUp 0.7s 0.15s ease both; }
+    .anim-3 { animation: fadeUp 0.7s 0.3s ease both; }
+    .anim-4 { animation: fadeUp 0.7s 0.45s ease both; }
+    .anim-img { animation: fadeIn 0.9s 0.2s ease both; }
+
+    /* ── Cursor dot ── */
+    #cursor {
+      width: 8px; height: 8px;
+      background: var(--cyan);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: width 0.2s, height 0.2s, opacity 0.2s;
+    }
+    #cursor.expand { width: 32px; height: 32px; opacity: 0.3; }
+
+    @media (max-width: 768px) {
+      #cursor { display: none; }
+      .hero-img { max-width: 260px; margin: 0 auto; }
+      .carousel-control-prev { left: 4px; }
+      .carousel-control-next { right: 4px; }
+    }
+
+    /* ── Dropdown in navbar ── */
+    .dropdown-menu {
+      background: var(--navy-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    .dropdown-item {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+    .dropdown-item:hover {
+      background: var(--cyan-dim);
+      color: var(--cyan);
+    }
+
+    /* ── Responsive image utilities ── */
+    .img-fluid { max-width: 100%; height: auto; }
+    .img-thumbnail {
+      border: 2px solid var(--border);
+      background: var(--navy-3);
+      border-radius: 10px;
+      padding: 3px;
+    }
+    img.rounded { border-radius: 50% !important; }
+  </style>
+</head>
+
+<body>
+  <!-- Custom cursor -->
+  <div id="cursor"></div>
+
+  <!-- ════════════════════════════════════
+       NAVBAR
+  ════════════════════════════════════ -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#home">
+        MS<span>.</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+          <li class="nav-item"><a class="nav-link active" href="#home"><i class="bi bi-house me-1"></i>Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about"><i class="bi bi-person me-1"></i>About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills"><i class="bi bi-bar-chart me-1"></i>Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects"><i class="bi bi-grid me-1"></i>Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experience"><i class="bi bi-briefcase me-1"></i>Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact"><i class="bi bi-envelope me-1"></i>Contact</a></li>
+          <!-- Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+              <i class="bi bi-three-dots me-1"></i>More
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="#gallery"><i class="bi bi-images me-2"></i>Gallery</a></li>
+              <li><a class="dropdown-item" href="#interactive"><i class="bi bi-toggles me-2"></i>Q&A</a></li>
+              <li><hr class="dropdown-divider" style="border-color:var(--border)"></li>
+              <li><a class="dropdown-item" href="#" id="resumeModalBtn"><i class="bi bi-file-earmark-person me-2"></i>View Resume</a></li>
+            </ul>
+          </li>
+          <li class="nav-item ms-2">
+            <a href="#contact" class="btn btn-cyan btn-sm">
+              <i class="bi bi-send me-1"></i>Hire Me
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════
+       HERO
+  ════════════════════════════════════ -->
+  <section id="home">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="container">
+      <div class="row align-items-center g-5">
+
+        <!-- Text col -->
+        <div class="col-12 col-lg-7 order-2 order-lg-1">
+          <span class="hero-tag anim-1">
+            <i class="bi bi-circle-fill me-1" style="font-size:0.5rem;color:var(--gold)"></i>
+            Available for Opportunities
+          </span>
+          <h1 class="hero-name anim-2">
+            Mouli<br><span class="highlight">Samireddi</span>
+          </h1>
+          <p class="hero-role anim-3">
+            <span>$ </span>Data Analyst&nbsp;/&nbsp;Data Engineer&nbsp;/&nbsp;SQL Developer
+          </p>
+          <p class="anim-3" style="color:var(--text-muted); max-width:520px; line-height:1.7; font-size:0.95rem;">
+            Transforming raw data into actionable insights. Designing scalable pipelines, 
+            building dashboards that tell stories, and writing SQL that means business.
+          </p>
+          <div class="d-flex flex-wrap gap-3 anim-4 mt-1">
+            <a href="#projects" class="btn btn-cyan">
+              <i class="bi bi-grid me-2"></i>View Projects
+            </a>
+            <a href="#contact" class="btn btn-outline-cyan">
+              <i class="bi bi-envelope me-2"></i>Get In Touch
+            </a>
+            <button class="btn btn-outline-cyan" id="heroAlertBtn" data-bs-toggle="tooltip" data-bs-placement="top" title="Download my latest CV">
+              <i class="bi bi-download me-2"></i>Resume
+            </button>
+          </div>
+          <!-- Stats -->
+          <div class="hero-stats anim-4">
+            <div class="stat-item">
+              <div class="num">2+</div>
+              <div class="lbl">Years Experience</div>
+            </div>
+            <div class="stat-item">
+              <div class="num">15+</div>
+              <div class="lbl">Projects Delivered</div>
+            </div>
+            <div class="stat-item">
+              <div class="num">8+</div>
+              <div class="lbl">Technologies</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image col -->
+        <div class="col-12 col-lg-5 order-1 order-lg-2 text-center anim-img">
+          <div class="hero-img-wrap d-inline-block">
+            <img src="data:image/png;base64,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" 
+              alt="Mouli Samireddi" 
+              class="hero-img img-fluid">
+          </div>
+          <!-- Alert below image -->
+          <div id="heroAlert" class="alert alert-cyan mt-3 d-none text-center" style="max-width:380px; margin:0.8rem auto 0;">
+            <i class="bi bi-download me-2"></i>Resume download coming soon!
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       ABOUT
+  ════════════════════════════════════ -->
+  <section id="about">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-12 col-lg-5">
+          <span class="section-label">// 01 — Who I Am</span>
+          <h2 class="section-title">About<br><span style="color:var(--cyan)">Me</span></h2>
+          <div class="section-divider"></div>
+          <p style="color:var(--text-muted); line-height:1.8;">
+            A passionate <strong style="color:var(--text-primary)">Data Professional</strong> based in India, specialising 
+            in extracting meaningful insights from complex datasets. I bridge the gap 
+            between raw data and business decisions through clean pipelines, sharp analytics, 
+            and intuitive dashboards.
+          </p>
+          <p style="color:var(--text-muted); line-height:1.8; margin-top:1rem;">
+            Currently focused on building end-to-end data solutions — from ingestion and 
+            transformation to reporting and visualization. I love writing elegant SQL and 
+            turning messy data into structured stories.
+          </p>
+          <div class="mt-3 mb-4">
+            <span class="tech-pill">Python</span>
+            <span class="tech-pill">SQL</span>
+            <span class="tech-pill">Power BI</span>
+            <span class="tech-pill">Tableau</span>
+            <span class="tech-pill">dbt</span>
+            <span class="tech-pill">Spark</span>
+            <span class="tech-pill">Azure</span>
+            <span class="tech-pill">Airflow</span>
+          </div>
+          <!-- Popover button -->
+          <button class="btn btn-outline-cyan btn-sm"
+            data-bs-toggle="popover"
+            data-bs-trigger="click"
+            data-bs-title="<i class='bi bi-star-fill me-1'></i> Fun Fact"
+            data-bs-content="I once reduced a 6-hour SQL report to under 30 seconds using window functions and proper indexing. Data speed is my hobby!">
+            <i class="bi bi-lightbulb me-1"></i>Fun Fact
+          </button>
+        </div>
+        <div class="col-12 col-lg-7">
+          <div class="row g-3">
+            <div class="col-12 col-md-6">
+              <div class="glass-card p-4 h-100">
+                <div class="mb-3" style="color:var(--cyan);font-size:1.6rem;"><i class="bi bi-person-badge"></i></div>
+                <h6 class="mono mb-3" style="color:var(--cyan); font-size:0.75rem; letter-spacing:2px;">PERSONAL INFO</h6>
+                <ul class="list-unstyled about-list mb-0">
+                  <li><strong>Name</strong> <span>Mouli Samireddi</span></li>
+                  <li><strong>Role</strong> <span>Data Analyst / Engineer</span></li>
+                  <li><strong>Location</strong> <span>India</span></li>
+                  <li><strong>Languages</strong> <span>Telugu, English, Hindi</span></li>
+                  <li><strong>Available</strong> <span style="color:var(--gold)">✓ Open to Work</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="glass-card p-4 h-100">
+                <div class="mb-3" style="color:var(--orange);font-size:1.6rem;"><i class="bi bi-rocket-takeoff"></i></div>
+                <h6 class="mono mb-3" style="color:var(--orange); font-size:0.75rem; letter-spacing:2px;">WHAT I DO</h6>
+                <ul class="list-unstyled about-list mb-0">
+                  <li><strong>Analytics</strong> <span>Dashboards, KPIs, Reports</span></li>
+                  <li><strong>Engineering</strong> <span>ETL/ELT Pipelines</span></li>
+                  <li><strong>Databases</strong> <span>SQL, Query Optimization</span></li>
+                  <li><strong>Cloud</strong> <span>Azure, AWS (basics)</span></li>
+                  <li><strong>Viz</strong> <span>Power BI, Tableau</span></li>
+                </ul>
+              </div>
+            </div>
+            <!-- Alert -->
+            <div class="col-12">
+              <div class="alert alert-cyan d-flex align-items-center gap-2 mb-0">
+                <i class="bi bi-info-circle-fill fs-5"></i>
+                <span>Currently pursuing advanced certifications in <strong>Azure Data Engineering</strong> and <strong>dbt</strong>.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       SKILLS
+  ════════════════════════════════════ -->
+  <section id="skills">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="section-label">// 02 — Expertise</span>
+        <h2 class="section-title">Technical <span style="color:var(--cyan)">Skills</span></h2>
+        <div class="section-divider mx-auto"></div>
+      </div>
+
+      <div class="row g-4">
+        <!-- Skill bars -->
+        <div class="col-12 col-lg-6">
+          <div class="glass-card p-4">
+            <h6 class="mono mb-4" style="color:var(--cyan);letter-spacing:2px;font-size:0.75rem;">CORE PROFICIENCIES</h6>
+            <div class="skill-bar-wrap">
+              <div class="skill-label"><span>SQL / T-SQL / PL-SQL</span><span>95%</span></div>
+              <div class="progress"><div class="progress-bar" style="width:95%" role="progressbar"></div></div>
+            </div>
+            <div class="skill-bar-wrap">
+              <div class="skill-label"><span>Python (Pandas, NumPy)</span><span>88%</span></div>
+              <div class="progress"><div class="progress-bar" style="width:88%" role="progressbar"></div></div>
+            </div>
+            <div class="skill-bar-wrap">
+              <div class="skill-label"><span>Power BI / DAX</span><span>90%</span></div>
+              <div class="progress"><div class="progress-bar" style="width:90%" role="progressbar"></div></div>
+            </div>
+            <div class="skill-bar-wrap">
+              <div class="skill-label"><span>Tableau</span><span>82%</span></div>
+              <div class="progress"><div class="progress-bar" style="width:82%" role="progressbar"></div></div>
+            </div>
+            <div class="skill-bar-wrap">
+              <div class="skill-label"><span>Apache Spark / PySpark</span><span>75%</span></div>
+              <div class="progress"><div class="progress-bar" style="width:75%" role="progressbar"></div></div>
+            </div>
+            <div class="skill-bar-wrap">
+              <div class="skill-label"><span>Azure Data Factory / Databricks</span><span>78%</span></div>
+              <div class="progress"><div class="progress-bar" style="width:78%" role="progressbar"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Badges + extra -->
+        <div class="col-12 col-lg-6">
+          <div class="glass-card p-4 mb-4">
+            <h6 class="mono mb-3" style="color:var(--orange);letter-spacing:2px;font-size:0.75rem;">DATABASES & TOOLS</h6>
+            <div>
+              <span class="badge badge-skill bg-transparent border" style="border-color:var(--cyan); color:var(--cyan)"><i class="bi bi-database me-1"></i>PostgreSQL</span>
+              <span class="badge badge-skill bg-transparent border" style="border-color:var(--cyan); color:var(--cyan)"><i class="bi bi-database me-1"></i>MySQL</span>
+              <span class="badge badge-skill bg-transparent border" style="border-color:var(--cyan); color:var(--cyan)"><i class="bi bi-database me-1"></i>SQL Server</span>
+              <span class="badge badge-skill bg-transparent border" style="border-color:var(--orange); color:var(--orange)"><i class="bi bi-snow me-1"></i>Snowflake</span>
+              <span class="badge badge-skill bg-transparent border" style="border-color:var(--orange); color:var(--orange)"><i class="bi bi-box me-1"></i>dbt</span>
+              <span class="badge badge-skill bg-transparent border" style="border-color:var(--gold); color:var(--gold)"><i class="bi bi-wind me-1"></i>Airflow</span>
+              <span class="badge badge-skill bg-transparent border" style="border-color:var(--gold); color:var(--gold)"><i class="bi bi-cloud me-1"></i>Azure</span>
+              <span class="badge badge-skill bg-transparent border" style="border-color:var(--cyan); color:var(--cyan)"><i class="bi bi-git me-1"></i>Git</span>
+              <span class="badge badge-skill bg-transparent border" style="border-color:var(--orange); color:var(--orange)"><i class="bi bi-file-earmark-excel me-1"></i>Excel</span>
+              <span class="badge badge-skill bg-transparent border" style="border-color:var(--cyan); color:var(--cyan)"><i class="bi bi-code-slash me-1"></i>Jupyter</span>
+            </div>
+          </div>
+          <div class="glass-card p-4">
+            <h6 class="mono mb-3" style="color:var(--gold);letter-spacing:2px;font-size:0.75rem;">SOFT SKILLS</h6>
+            <div class="row g-2">
+              <div class="col-6">
+                <div style="color:var(--text-muted);font-size:0.85rem;padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.05)">
+                  <i class="bi bi-check-circle me-2" style="color:var(--cyan)"></i>Data Storytelling
+                </div>
+              </div>
+              <div class="col-6">
+                <div style="color:var(--text-muted);font-size:0.85rem;padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.05)">
+                  <i class="bi bi-check-circle me-2" style="color:var(--cyan)"></i>Problem Solving
+                </div>
+              </div>
+              <div class="col-6">
+                <div style="color:var(--text-muted);font-size:0.85rem;padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.05)">
+                  <i class="bi bi-check-circle me-2" style="color:var(--cyan)"></i>Stakeholder Mgmt
+                </div>
+              </div>
+              <div class="col-6">
+                <div style="color:var(--text-muted);font-size:0.85rem;padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.05)">
+                  <i class="bi bi-check-circle me-2" style="color:var(--cyan)"></i>Agile / Scrum
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       PROJECTS
+  ════════════════════════════════════ -->
+  <section id="projects">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="section-label">// 03 — Portfolio</span>
+        <h2 class="section-title">Featured <span style="color:var(--cyan)">Projects</span></h2>
+        <div class="section-divider mx-auto"></div>
+      </div>
+
+      <div class="row g-4">
+
+        <!-- Project 1 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="glass-card project-card p-4 h-100">
+            <div class="project-icon"><i class="bi bi-bar-chart-line"></i></div>
+            <div class="mb-2">
+              <span class="tag">SQL</span><span class="tag">Power BI</span><span class="tag">Python</span>
+            </div>
+            <h5 class="mb-2" style="font-size:1rem;">Sales Analytics Dashboard</h5>
+            <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.7;">
+              End-to-end sales reporting system with real-time KPIs, YoY comparisons, 
+              and drill-down capabilities for regional managers.
+            </p>
+            <div class="d-flex gap-2 mt-auto pt-3">
+              <button class="btn btn-outline-cyan btn-sm" data-bs-toggle="modal" data-bs-target="#projectModal1">
+                <i class="bi bi-eye me-1"></i>Details
+              </button>
+              <a href="#" class="btn btn-outline-cyan btn-sm"><i class="bi bi-github me-1"></i>Code</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="glass-card project-card p-4 h-100">
+            <div class="project-icon" style="color:var(--orange);background:rgba(255,107,53,0.1);border-color:rgba(255,107,53,0.2)">
+              <i class="bi bi-diagram-3"></i>
+            </div>
+            <div class="mb-2">
+              <span class="tag">Airflow</span><span class="tag">dbt</span><span class="tag">Snowflake</span>
+            </div>
+            <h5 class="mb-2" style="font-size:1rem;">ETL Pipeline Automation</h5>
+            <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.7;">
+              Automated multi-source data ingestion pipeline processing 5M+ records daily 
+              with dbt transformations and Airflow orchestration.
+            </p>
+            <div class="d-flex gap-2 mt-auto pt-3">
+              <button class="btn btn-outline-cyan btn-sm" data-bs-toggle="modal" data-bs-target="#projectModal2">
+                <i class="bi bi-eye me-1"></i>Details
+              </button>
+              <a href="#" class="btn btn-outline-cyan btn-sm"><i class="bi bi-github me-1"></i>Code</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="glass-card project-card p-4 h-100">
+            <div class="project-icon" style="color:var(--gold);background:rgba(245,197,24,0.1);border-color:rgba(245,197,24,0.2)">
+              <i class="bi bi-graph-up-arrow"></i>
+            </div>
+            <div class="mb-2">
+              <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Tableau</span>
+            </div>
+            <h5 class="mb-2" style="font-size:1rem;">Customer Churn Predictor</h5>
+            <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.7;">
+              ML-driven churn analysis with exploratory data analysis, feature engineering 
+              and Tableau dashboard for business stakeholders.
+            </p>
+            <div class="d-flex gap-2 mt-auto pt-3">
+              <button class="btn btn-outline-cyan btn-sm" data-bs-toggle="modal" data-bs-target="#projectModal3">
+                <i class="bi bi-eye me-1"></i>Details
+              </button>
+              <a href="#" class="btn btn-outline-cyan btn-sm"><i class="bi bi-github me-1"></i>Code</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="glass-card project-card p-4 h-100">
+            <div class="project-icon"><i class="bi bi-cloud-upload"></i></div>
+            <div class="mb-2">
+              <span class="tag">Azure</span><span class="tag">PySpark</span><span class="tag">Delta Lake</span>
+            </div>
+            <h5 class="mb-2" style="font-size:1rem;">Azure Data Lakehouse</h5>
+            <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.7;">
+              Designed a medallion architecture (Bronze/Silver/Gold) data lakehouse on 
+              Azure using Databricks and Delta Lake.
+            </p>
+            <div class="d-flex gap-2 mt-auto pt-3">
+              <button class="btn btn-outline-cyan btn-sm" data-bs-toggle="modal" data-bs-target="#projectModal1">
+                <i class="bi bi-eye me-1"></i>Details
+              </button>
+              <a href="#" class="btn btn-outline-cyan btn-sm"><i class="bi bi-github me-1"></i>Code</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="glass-card project-card p-4 h-100">
+            <div class="project-icon" style="color:var(--orange);background:rgba(255,107,53,0.1);border-color:rgba(255,107,53,0.2)">
+              <i class="bi bi-search"></i>
+            </div>
+            <div class="mb-2">
+              <span class="tag">SQL Server</span><span class="tag">SSRS</span><span class="tag">T-SQL</span>
+            </div>
+            <h5 class="mb-2" style="font-size:1rem;">Financial Reconciliation System</h5>
+            <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.7;">
+              Complex T-SQL stored procedures for automated bank reconciliation 
+              reducing manual effort by 70% for finance teams.
+            </p>
+            <div class="d-flex gap-2 mt-auto pt-3">
+              <button class="btn btn-outline-cyan btn-sm" data-bs-toggle="modal" data-bs-target="#projectModal2">
+                <i class="bi bi-eye me-1"></i>Details
+              </button>
+              <a href="#" class="btn btn-outline-cyan btn-sm"><i class="bi bi-github me-1"></i>Code</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 6 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="glass-card project-card p-4 h-100">
+            <div class="project-icon" style="color:var(--gold);background:rgba(245,197,24,0.1);border-color:rgba(245,197,24,0.2)">
+              <i class="bi bi-activity"></i>
+            </div>
+            <div class="mb-2">
+              <span class="tag">Kafka</span><span class="tag">Python</span><span class="tag">Power BI</span>
+            </div>
+            <h5 class="mb-2" style="font-size:1rem;">Real-Time IoT Data Monitor</h5>
+            <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.7;">
+              Streaming IoT sensor data pipeline using Kafka, Python consumers, 
+              and live Power BI dashboards for operations teams.
+            </p>
+            <div class="d-flex gap-2 mt-auto pt-3">
+              <button class="btn btn-outline-cyan btn-sm" data-bs-toggle="modal" data-bs-target="#projectModal3">
+                <i class="bi bi-eye me-1"></i>Details
+              </button>
+              <a href="#" class="btn btn-outline-cyan btn-sm"><i class="bi bi-github me-1"></i>Code</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       EXPERIENCE & EDUCATION
+  ════════════════════════════════════ -->
+  <section id="experience">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="section-label">// 04 — Journey</span>
+        <h2 class="section-title">Experience & <span style="color:var(--cyan)">Education</span></h2>
+        <div class="section-divider mx-auto"></div>
+      </div>
+
+      <div class="row g-5">
+
+        <!-- Experience list group -->
+        <div class="col-12 col-lg-6">
+          <h6 class="mono mb-4" style="color:var(--orange);letter-spacing:2px;font-size:0.75rem;">
+            <i class="bi bi-briefcase me-2"></i>WORK EXPERIENCE
+          </h6>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item list-group-item-exp">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="role">Data Analyst</div>
+                  <div class="company"><i class="bi bi-building me-1"></i>Tech Analytics Pvt. Ltd.</div>
+                </div>
+                <span class="duration">2023 – Present</span>
+              </div>
+              <p style="color:var(--text-muted);font-size:0.82rem;margin-top:0.5rem;margin-bottom:0;">
+                Designed Power BI dashboards, optimized SQL queries, led ETL migrations.
+              </p>
+            </li>
+            <li class="list-group-item list-group-item-exp">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="role">SQL Developer Intern</div>
+                  <div class="company"><i class="bi bi-building me-1"></i>DataStream Solutions</div>
+                </div>
+                <span class="duration">2022 – 2023</span>
+              </div>
+              <p style="color:var(--text-muted);font-size:0.82rem;margin-top:0.5rem;margin-bottom:0;">
+                Developed stored procedures, views, and automated reporting scripts.
+              </p>
+            </li>
+            <li class="list-group-item list-group-item-exp">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="role">Data Engineering Intern</div>
+                  <div class="company"><i class="bi bi-building me-1"></i>CloudPipe Technologies</div>
+                </div>
+                <span class="duration">2021 – 2022</span>
+              </div>
+              <p style="color:var(--text-muted);font-size:0.82rem;margin-top:0.5rem;margin-bottom:0;">
+                Built Airflow DAGs, dbt models, and monitored data pipeline health.
+              </p>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Education table -->
+        <div class="col-12 col-lg-6">
+          <h6 class="mono mb-4" style="color:var(--cyan);letter-spacing:2px;font-size:0.75rem;">
+            <i class="bi bi-mortarboard me-2"></i>EDUCATION & CERTIFICATIONS
+          </h6>
+          <div class="table-responsive">
+            <table class="table table-dark table-striped table-hover align-middle">
+              <thead>
+                <tr>
+                  <th><i class="bi bi-journal me-1"></i>Qualification</th>
+                  <th><i class="bi bi-building me-1"></i>Institution</th>
+                  <th><i class="bi bi-calendar me-1"></i>Year</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>B.Tech — CSE</td>
+                  <td>XYZ University</td>
+                  <td><span class="badge" style="background:var(--cyan-dim);color:var(--cyan);">2022</span></td>
+                </tr>
+                <tr>
+                  <td>Azure Data Fundamentals (DP-900)</td>
+                  <td>Microsoft</td>
+                  <td><span class="badge" style="background:var(--cyan-dim);color:var(--cyan);">2023</span></td>
+                </tr>
+                <tr>
+                  <td>Power BI Data Analyst (PL-300)</td>
+                  <td>Microsoft</td>
+                  <td><span class="badge" style="background:rgba(255,107,53,0.15);color:var(--orange);">2024</span></td>
+                </tr>
+                <tr>
+                  <td>dbt Analytics Engineer</td>
+                  <td>dbt Labs</td>
+                  <td><span class="badge" style="background:rgba(245,197,24,0.15);color:var(--gold);">2024</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Thumbnail image -->
+          <div class="mt-3 d-flex align-items-center gap-3">
+            <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/wAARCAAoACgDASIAAhEBAxEB/8QAGwABAAIDAQEAAAAAAAAAAAAAAAQGAQMFBwL/xAAsEAABBAIBAgUDBQAAAAAAAAABAAIDEQQFITFBBhJRYRMiQnGhFTJSgZH/xAAZAQADAQEBAAAAAAAAAAAAAAAAAQIEBQP/xAAeEQEBAAIDAQEBAAAAAAAAAAAAAQIRAzEhEkFR8P/aAAwDAQACEQMRAD8A+pkREBERAREQEREBFiH9oJzEzLPWdO9z6j7G5AKkuFvMf6d3uN5/q6f4B7q/wB0TePIcvlRVYa7sbaWNdKxj3bMjHFoJAHTodkFaTcUTfJcBsNhsbAf5LrZLiDkqNuOrJ3YpHPAkjd7uiaeQQe1yRkupTYb26diyVzSSWuABAIBLdxrQ0dD06LSMWl1/lftZuLkXtbV5YiIqiIiAiIgLxJGyVjo5GB7HjTmuGoI6gqUV4mNxuiJlXvF4G4fZxXVauzNIHiC08hS40eL5Qg9b+HaB3c0bqOt5BPHZQM+O88U+Bx4KiHNJcMWN2o7OVnJeVnxJNLW5Bsr8iB/gd7sLxnP3zFdcbxMcHrfbAf6ynvW2QsPXmb30pDW5P4rI7qvSRjIm4WNyO0bfJERUQREQEREBERB//2Q==" 
+                 alt="Mouli Samireddi profile" 
+                 class="img-thumbnail rounded" 
+                 style="width:52px;height:52px;object-fit:cover;">
+            <div>
+              <div style="font-size:0.85rem;font-weight:600;">Mouli Samireddi</div>
+              <div style="font-size:0.75rem;color:var(--text-muted);">Data Professional · India</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       GALLERY (Carousel)
+  ════════════════════════════════════ -->
+  <section id="gallery">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="section-label">// 05 — Showcase</span>
+        <h2 class="section-title">Work <span style="color:var(--cyan)">Gallery</span></h2>
+        <div class="section-divider mx-auto"></div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-9" style="position:relative;">
+          <div id="portfolioCarousel" class="carousel slide" data-bs-ride="carousel">
+            <!-- Indicators -->
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#portfolioCarousel" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#portfolioCarousel" data-bs-slide-to="1"></button>
+              <button type="button" data-bs-target="#portfolioCarousel" data-bs-slide-to="2"></button>
+              <button type="button" data-bs-target="#portfolioCarousel" data-bs-slide-to="3"></button>
+            </div>
+            <div class="carousel-inner" style="border-radius:14px; border:1px solid var(--border);">
+              <div class="carousel-item active">
+                <div style="background: linear-gradient(135deg, #0d1627, #0a2240); height:420px; display:flex; align-items:center; justify-content:center; border-radius:14px; position:relative;">
+                  <div style="text-align:center;">
+                    <i class="bi bi-bar-chart-line" style="font-size:5rem;color:var(--cyan);opacity:0.6;"></i>
+                    <div style="font-family:'Syne',sans-serif;font-size:1.5rem;margin-top:1rem;">Sales Analytics Dashboard</div>
+                  </div>
+                  <div class="carousel-caption-custom">
+                    <span class="tech-pill">Power BI</span><span class="tech-pill">SQL</span>
+                    <p style="margin:0.5rem 0 0;font-size:0.85rem;color:var(--text-muted);">Real-time KPI tracking for regional sales teams</p>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div style="background: linear-gradient(135deg, #1a0d0d, #2a1020); height:420px; display:flex; align-items:center; justify-content:center; border-radius:14px; position:relative;">
+                  <div style="text-align:center;">
+                    <i class="bi bi-diagram-3" style="font-size:5rem;color:var(--orange);opacity:0.6;"></i>
+                    <div style="font-family:'Syne',sans-serif;font-size:1.5rem;margin-top:1rem;">ETL Pipeline Architecture</div>
+                  </div>
+                  <div class="carousel-caption-custom">
+                    <span class="tech-pill">Airflow</span><span class="tech-pill">dbt</span><span class="tech-pill">Snowflake</span>
+                    <p style="margin:0.5rem 0 0;font-size:0.85rem;color:var(--text-muted);">5M+ daily records processed automatically</p>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div style="background: linear-gradient(135deg, #0d1a0d, #102510); height:420px; display:flex; align-items:center; justify-content:center; border-radius:14px; position:relative;">
+                  <div style="text-align:center;">
+                    <i class="bi bi-graph-up-arrow" style="font-size:5rem;color:var(--gold);opacity:0.6;"></i>
+                    <div style="font-family:'Syne',sans-serif;font-size:1.5rem;margin-top:1rem;">Churn Prediction Analysis</div>
+                  </div>
+                  <div class="carousel-caption-custom">
+                    <span class="tech-pill">Python</span><span class="tech-pill">Pandas</span><span class="tech-pill">Tableau</span>
+                    <p style="margin:0.5rem 0 0;font-size:0.85rem;color:var(--text-muted);">ML-driven churn analysis with stakeholder dashboard</p>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div style="background: linear-gradient(135deg, #0d0d1a, #101040); height:420px; display:flex; align-items:center; justify-content:center; border-radius:14px; position:relative;">
+                  <div style="text-align:center;">
+                    <i class="bi bi-cloud-upload" style="font-size:5rem;color:#a78bfa;opacity:0.6;"></i>
+                    <div style="font-family:'Syne',sans-serif;font-size:1.5rem;margin-top:1rem;">Azure Lakehouse Design</div>
+                  </div>
+                  <div class="carousel-caption-custom">
+                    <span class="tech-pill">Azure</span><span class="tech-pill">Databricks</span><span class="tech-pill">Delta Lake</span>
+                    <p style="margin:0.5rem 0 0;font-size:0.85rem;color:var(--text-muted);">Medallion architecture on Azure cloud platform</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="prev">
+              <i class="bi bi-chevron-left" style="color:var(--cyan)"></i>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="next">
+              <i class="bi bi-chevron-right" style="color:var(--cyan)"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       INTERACTIVE / ACCORDION (Collapse)
+  ════════════════════════════════════ -->
+  <section id="interactive">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="section-label">// 06 — FAQ</span>
+        <h2 class="section-title">Common <span style="color:var(--cyan)">Questions</span></h2>
+        <div class="section-divider mx-auto"></div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+
+          <!-- Collapse toggle button -->
+          <div class="text-center mb-4">
+            <button class="btn btn-outline-cyan btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#faqSection">
+              <i class="bi bi-chevron-down me-1"></i>Toggle All FAQs
+            </button>
+          </div>
+
+          <div class="collapse show" id="faqSection">
+            <div class="accordion" id="faqAccordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                    <i class="bi bi-database me-2" style="color:var(--cyan)"></i>What databases do you work with?
+                  </button>
+                </h2>
+                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    I'm proficient with <strong style="color:var(--cyan)">SQL Server, PostgreSQL, MySQL, and Snowflake</strong>. 
+                    I specialise in query optimisation, indexing strategies, and writing complex stored procedures. 
+                    I've worked with both OLTP and OLAP systems.
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                    <i class="bi bi-diagram-3 me-2" style="color:var(--orange)"></i>What does your data engineering stack look like?
+                  </button>
+                </h2>
+                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    My primary stack includes <strong style="color:var(--orange)">Apache Airflow for orchestration, dbt for transformations, 
+                    and Snowflake / Azure as the warehouse layer</strong>. For streaming, I've used Kafka and Azure Event Hubs.
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                    <i class="bi bi-bar-chart me-2" style="color:var(--gold)"></i>Which BI tools are you experienced with?
+                  </button>
+                </h2>
+                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    I build professional reports in <strong style="color:var(--gold)">Power BI (including DAX measures and Power Query) 
+                    and Tableau</strong>. I'm experienced with connecting live data sources, Row-Level Security, 
+                    and publishing to Power BI Service / Tableau Server.
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                    <i class="bi bi-cloud me-2" style="color:var(--cyan)"></i>Are you available for remote work?
+                  </button>
+                </h2>
+                <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    Yes! I'm fully available for <strong style="color:var(--cyan)">remote, hybrid, or on-site opportunities</strong>. 
+                    I collaborate effectively across time zones and have experience working in distributed, 
+                    agile teams.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       CONTACT
+  ════════════════════════════════════ -->
+  <section id="contact">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="section-label">// 07 — Let's Talk</span>
+        <h2 class="section-title">Get In <span style="color:var(--cyan)">Touch</span></h2>
+        <div class="section-divider mx-auto"></div>
+      </div>
+
+      <div class="row g-5">
+
+        <!-- Contact info -->
+        <div class="col-12 col-lg-4">
+          <div class="contact-info-item">
+            <div class="icon"><i class="bi bi-envelope"></i></div>
+            <div>
+              <div class="info-label">Email</div>
+              <div class="info-val">mouli.samireddi@email.com</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="icon"><i class="bi bi-telephone"></i></div>
+            <div>
+              <div class="info-label">Phone</div>
+              <div class="info-val">+91 98765 43210</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="icon"><i class="bi bi-geo-alt"></i></div>
+            <div>
+              <div class="info-label">Location</div>
+              <div class="info-val">India</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="icon"><i class="bi bi-linkedin"></i></div>
+            <div>
+              <div class="info-label">LinkedIn</div>
+              <div class="info-val">linkedin.com/in/moulisamireddi</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact form -->
+        <div class="col-12 col-lg-8">
+          <div class="glass-card p-4 p-lg-5">
+            <form id="contactForm" novalidate>
+              <div class="row g-3">
+                <!-- Input group: Name -->
+                <div class="col-12 col-md-6">
+                  <label class="form-label"><i class="bi bi-person me-1"></i>Full Name</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                    <input type="text" class="form-control" id="nameInput" placeholder="Your name" required>
+                    <div class="invalid-feedback">Please enter your name.</div>
+                  </div>
+                </div>
+
+                <!-- Email -->
+                <div class="col-12 col-md-6">
+                  <label class="form-label"><i class="bi bi-envelope me-1"></i>Email Address</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                    <input type="email" class="form-control" id="emailInput" placeholder="your@email.com" required>
+                    <div class="invalid-feedback">Please enter a valid email.</div>
+                  </div>
+                </div>
+
+                <!-- Password (demo field) -->
+                <div class="col-12 col-md-6">
+                  <label class="form-label"><i class="bi bi-lock me-1"></i>Set Access Code (optional)</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-key"></i></span>
+                    <input type="password" class="form-control" id="passInput" placeholder="••••••••">
+                  </div>
+                </div>
+
+                <!-- Select -->
+                <div class="col-12 col-md-6">
+                  <label class="form-label"><i class="bi bi-briefcase me-1"></i>Enquiry Type</label>
+                  <select class="form-select" id="enquiryType" required>
+                    <option value="" disabled selected>Select type…</option>
+                    <option>Job Opportunity</option>
+                    <option>Freelance Project</option>
+                    <option>Collaboration</option>
+                    <option>General Question</option>
+                  </select>
+                  <div class="invalid-feedback">Please select an enquiry type.</div>
+                </div>
+
+                <!-- Textarea -->
+                <div class="col-12">
+                  <label class="form-label"><i class="bi bi-chat-text me-1"></i>Your Message</label>
+                  <textarea class="form-control" id="messageInput" rows="4" placeholder="Tell me about your project or opportunity..." required></textarea>
+                  <div class="invalid-feedback">Please enter your message.</div>
+                </div>
+
+                <!-- Radio buttons -->
+                <div class="col-12">
+                  <label class="form-label"><i class="bi bi-clock me-1"></i>Preferred Response Time</label>
+                  <div class="d-flex flex-wrap gap-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="responseTime" id="r1" value="asap" checked>
+                      <label class="form-check-label" for="r1">ASAP</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="responseTime" id="r2" value="24h">
+                      <label class="form-check-label" for="r2">Within 24h</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="responseTime" id="r3" value="week">
+                      <label class="form-check-label" for="r3">This week</label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Checkboxes -->
+                <div class="col-12">
+                  <label class="form-label"><i class="bi bi-check2-square me-1"></i>I'm interested in</label>
+                  <div class="d-flex flex-wrap gap-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="c1" checked>
+                      <label class="form-check-label" for="c1">Data Analytics</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="c2">
+                      <label class="form-check-label" for="c2">Data Engineering</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="c3">
+                      <label class="form-check-label" for="c3">SQL Development</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="c4">
+                      <label class="form-check-label" for="c4">Dashboard Design</label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="col-12 d-flex gap-3 flex-wrap align-items-center">
+                  <button type="submit" class="btn btn-cyan">
+                    <i class="bi bi-send me-2"></i>Send Message
+                  </button>
+                  <button type="button" class="btn btn-outline-cyan" id="clearFormBtn">
+                    <i class="bi bi-x-circle me-2"></i>Clear
+                  </button>
+                  <!-- Popover on submit -->
+                  <span id="formSuccess" class="d-none" style="color:var(--cyan);font-size:0.85rem;">
+                    <i class="bi bi-check-circle-fill me-1"></i>Message sent successfully!
+                  </span>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════ -->
+  <footer>
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-12 col-md-4">
+          <div class="footer-brand mb-1">MS.</div>
+          <p style="color:var(--text-muted);font-size:0.82rem;margin:0;">
+            Data Analyst · Data Engineer · SQL Developer
+          </p>
+        </div>
+        <div class="col-12 col-md-4 text-md-center">
+          <div class="d-flex justify-content-md-center gap-2">
+            <a href="#" class="social-link" data-bs-toggle="tooltip" title="LinkedIn">
+              <i class="bi bi-linkedin"></i>
+            </a>
+            <a href="#" class="social-link" data-bs-toggle="tooltip" title="GitHub">
+              <i class="bi bi-github"></i>
+            </a>
+            <a href="#" class="social-link" data-bs-toggle="tooltip" title="Twitter / X">
+              <i class="bi bi-twitter-x"></i>
+            </a>
+            <a href="#" class="social-link" data-bs-toggle="tooltip" title="Kaggle">
+              <i class="bi bi-graph-up"></i>
+            </a>
+            <a href="mailto:mouli@email.com" class="social-link" data-bs-toggle="tooltip" title="Email">
+              <i class="bi bi-envelope"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 text-md-end">
+          <p style="color:var(--text-muted);font-size:0.8rem;margin:0;">
+            © 2025 Mouli Samireddi. Built with Bootstrap 5.
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ════════════════════════════════════
+       MODALS
+  ════════════════════════════════════ -->
+
+  <!-- Project Modal 1 -->
+  <div class="modal fade" id="projectModal1" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-bar-chart-line me-2" style="color:var(--cyan)"></i>Sales Analytics Dashboard</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div style="background:linear-gradient(135deg,#0d1627,#0a2240);height:200px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;">
+            <i class="bi bi-bar-chart-line" style="font-size:4rem;color:var(--cyan);opacity:0.7;"></i>
+          </div>
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <span class="tech-pill">SQL</span><span class="tech-pill">Power BI</span>
+            <span class="tech-pill">Python</span><span class="tech-pill">DAX</span>
+          </div>
+          <p style="color:var(--text-muted);line-height:1.8;">
+            A comprehensive sales analytics system that consolidates data from multiple ERPs 
+            into a single Power BI dashboard. Features YoY comparisons, regional breakdown, 
+            product mix analysis, and real-time refresh via Power BI Gateway.
+          </p>
+          <h6 class="mono mt-3" style="color:var(--cyan);font-size:0.75rem;letter-spacing:2px;">KEY ACHIEVEMENTS</h6>
+          <ul style="color:var(--text-muted);font-size:0.88rem;line-height:2;">
+            <li>Reduced reporting time from 3 days to 2 hours</li>
+            <li>Implemented Row-Level Security for 50+ regional managers</li>
+            <li>Complex DAX measures for forecasting and variance analysis</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-cyan btn-sm" data-bs-dismiss="modal">Close</button>
+          <a href="#" class="btn btn-cyan btn-sm"><i class="bi bi-github me-1"></i>View Code</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project Modal 2 -->
+  <div class="modal fade" id="projectModal2" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-diagram-3 me-2" style="color:var(--orange)"></i>ETL Pipeline Automation</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div style="background:linear-gradient(135deg,#1a0d0d,#2a1020);height:200px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;">
+            <i class="bi bi-diagram-3" style="font-size:4rem;color:var(--orange);opacity:0.7;"></i>
+          </div>
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <span class="tech-pill">Airflow</span><span class="tech-pill">dbt</span>
+            <span class="tech-pill">Snowflake</span><span class="tech-pill">Python</span>
+          </div>
+          <p style="color:var(--text-muted);line-height:1.8;">
+            Fully automated data pipeline that ingests from 8 different sources 
+            (APIs, databases, flat files), transforms via dbt, and loads into Snowflake — 
+            all orchestrated by Apache Airflow with alerting on SLA breaches.
+          </p>
+          <h6 class="mono mt-3" style="color:var(--orange);font-size:0.75rem;letter-spacing:2px;">KEY ACHIEVEMENTS</h6>
+          <ul style="color:var(--text-muted);font-size:0.88rem;line-height:2;">
+            <li>5M+ records processed daily with 99.8% uptime</li>
+            <li>Data quality tests via dbt catching 200+ anomalies/month</li>
+            <li>Reduced pipeline failure resolution from hours to minutes</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-cyan btn-sm" data-bs-dismiss="modal">Close</button>
+          <a href="#" class="btn btn-cyan btn-sm"><i class="bi bi-github me-1"></i>View Code</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project Modal 3 -->
+  <div class="modal fade" id="projectModal3" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-graph-up-arrow me-2" style="color:var(--gold)"></i>Customer Churn Predictor</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div style="background:linear-gradient(135deg,#0d1a0d,#102510);height:200px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;">
+            <i class="bi bi-graph-up-arrow" style="font-size:4rem;color:var(--gold);opacity:0.7;"></i>
+          </div>
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <span class="tech-pill">Python</span><span class="tech-pill">Pandas</span>
+            <span class="tech-pill">Tableau</span><span class="tech-pill">Scikit-learn</span>
+          </div>
+          <p style="color:var(--text-muted);line-height:1.8;">
+            End-to-end churn analysis project covering exploratory data analysis, 
+            feature engineering, model training and a business-facing Tableau dashboard 
+            highlighting at-risk customers and recommended retention strategies.
+          </p>
+          <h6 class="mono mt-3" style="color:var(--gold);font-size:0.75rem;letter-spacing:2px;">KEY ACHIEVEMENTS</h6>
+          <ul style="color:var(--text-muted);font-size:0.88rem;line-height:2;">
+            <li>Identified top 5 churn predictors with 87% model accuracy</li>
+            <li>Dashboard used by marketing team to reduce churn by 12%</li>
+            <li>Automated weekly score refresh via Python scripts</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-cyan btn-sm" data-bs-dismiss="modal">Close</button>
+          <a href="#" class="btn btn-cyan btn-sm"><i class="bi bi-github me-1"></i>View Code</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Resume Modal -->
+  <div class="modal fade" id="resumeModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center">
+        <div class="modal-header justify-content-center border-0 pb-0">
+          <button type="button" class="btn-close position-absolute end-0 top-0 m-3" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body py-4">
+          <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/wAARCAAoACgDASIAAhEBAxEB/8QAGwABAAIDAQEAAAAAAAAAAAAAAAQGAQMFBwL/xAAsEAABBAIBAgUDBQAAAAAAAAABAAIDEQQFITFBBhJRYRMiQnGhFTJSgZH/xAAZAQADAQEBAAAAAAAAAAAAAAAAAQIEBQP/xAAeEQEBAAIDAQEBAAAAAAAAAAAAAQIRAzEhEkFR8P/aAAwDAQACEQMRAD8A+pkREBERAREQEREBFiH9oJzEzLPWdO9z6j7G5AKkuFvMf6d3uN5/q6f4B7q/wB0TePIcvlRVYa7sbaWNdKxj3bMjHFoJAHTodkFaTcUTfJcBsNhsbAf5LrZLiDkqNuOrJ3YpHPAkjd7uiaeQQe1yRkupTYb26diyVzSSWuABAIBLdxrQ0dD06LSMWl1/lftZuLkXtbV5YiIqiIiAiIgLxJGyVjo5GB7HjTmuGoI6gqUV4mNxuiJlXvF4G4fZxXVauzNIHiC08hS40eL5Qg9b+HaB3c0bqOt5BPHZQM+O88U+Bx4KiHNJcMWN2o7OVnJeVnxJNLW5Bsr8iB/gd7sLxnP3zFdcbxMcHrfbAf6ynvW2QsPXmb30pDW5P4rI7qvSRjIm4WNyO0bfJERUQREQEREBERB//2Q==" 
+            alt="Mouli Samireddi" 
+            class="rounded-circle mb-3 img-fluid" 
+            style="width:90px;height:90px;object-fit:cover;border:3px solid var(--cyan);">
+          <h5 class="mb-1" style="font-family:'Syne',sans-serif;">Mouli Samireddi</h5>
+          <p style="color:var(--text-muted);font-size:0.85rem;">Data Analyst · Data Engineer · SQL Developer</p>
+          <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
+            <span class="tech-pill">SQL</span><span class="tech-pill">Python</span>
+            <span class="tech-pill">Power BI</span><span class="tech-pill">dbt</span>
+          </div>
+          <div class="alert alert-cyan">
+            <i class="bi bi-file-earmark-pdf me-2"></i>
+            Resume is ready to download as PDF
+          </div>
+        </div>
+        <div class="modal-footer justify-content-center border-0 pt-0 pb-4">
+          <a href="#" class="btn btn-cyan">
+            <i class="bi bi-download me-2"></i>Download Resume PDF
+          </a>
+          <button class="btn btn-outline-cyan" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>
+    // ── Init Bootstrap components ──
+    const tooltipEls = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    tooltipEls.forEach(el => new bootstrap.Tooltip(el, { html: true }));
+
+    const popoverEls = document.querySelectorAll('[data-bs-toggle="popover"]');
+    popoverEls.forEach(el => new bootstrap.Popover(el, { html: true }));
+
+    // ── Custom cursor ──
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top  = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
+    });
+
+    // ── jQuery: Navbar active link on scroll ──
+    $(window).on('scroll', function () {
+      const scrollPos = $(this).scrollTop() + 80;
+      $('section').each(function () {
+        const top    = $(this).offset().top;
+        const bottom = top + $(this).outerHeight();
+        if (scrollPos >= top && scrollPos < bottom) {
+          const id = $(this).attr('id');
+          $('.nav-link').removeClass('active');
+          $(`.nav-link[href="#${id}"]`).addClass('active');
+        }
+      });
+    });
+
+    // ── jQuery: Animate skill bars on scroll ──
+    const barsAnimated = { done: false };
+    $(window).on('scroll', function () {
+      if (barsAnimated.done) return;
+      const skillsTop = $('#skills').offset().top;
+      if ($(this).scrollTop() + $(this).height() > skillsTop + 100) {
+        barsAnimated.done = true;
+        $('.progress-bar').each(function () {
+          const w = $(this).data('width') || $(this).attr('style').match(/width:(\d+)/)?.[1] || 0;
+          $(this).css('width', '0').animate({ width: w + '%' }, 1400);
+        });
+      }
+    });
+
+    // ── jQuery: Resume modal trigger from dropdown ──
+    $('#resumeModalBtn').on('click', function (e) {
+      e.preventDefault();
+      const modal = new bootstrap.Modal(document.getElementById('resumeModal'));
+      modal.show();
+    });
+
+    // ── jQuery: Resume download alert (hero btn) ──
+    $('#heroAlertBtn').on('click', function () {
+      const alert = $('#heroAlert');
+      alert.removeClass('d-none').hide().fadeIn(300);
+      setTimeout(() => alert.fadeOut(400, () => alert.addClass('d-none')), 3000);
+    });
+
+    // ── jQuery: Contact form validation & submit ──
+    $('#contactForm').on('submit', function (e) {
+      e.preventDefault();
+      const form = this;
+      if (!form.checkValidity()) {
+        form.classList.add('was-validated');
+        return;
+      }
+      form.classList.remove('was-validated');
+      // Show success
+      $('#formSuccess').removeClass('d-none').hide().fadeIn(300);
+      setTimeout(() => $('#formSuccess').fadeOut(400), 3500);
+      form.reset();
+    });
+
+    // ── jQuery: Clear form ──
+    $('#clearFormBtn').on('click', function () {
+      const form = document.getElementById('contactForm');
+      form.reset();
+      form.classList.remove('was-validated');
+      $('#formSuccess').addClass('d-none');
+    });
+
+    // ── jQuery: Hover glow on project cards ──
+    $('.project-card').on('mouseenter', function () {
+      $(this).find('.project-icon').css('transform', 'scale(1.1) rotate(-3deg)');
+    }).on('mouseleave', function () {
+      $(this).find('.project-icon').css('transform', 'scale(1) rotate(0)');
+    });
+
+    // ── jQuery: Dynamically open project modal ──
+    $(document).on('click', '[data-modal-id]', function () {
+      const id = $(this).data('modal-id');
+      new bootstrap.Modal(document.getElementById(id)).show();
+    });
+
+    // ── Navbar collapse on mobile link click ──
+    $('.navbar-nav .nav-link').on('click', function () {
+      const navCollapse = document.getElementById('navMenu');
+      if (navCollapse.classList.contains('show')) {
+        bootstrap.Collapse.getInstance(navCollapse)?.hide();
+      }
+    });
+  </script>
+</body>
+</html>
