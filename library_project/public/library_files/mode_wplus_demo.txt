@@ -1,0 +1,2 @@
+Mode w+ — Written at 29 Mar 2026 08:23:49
+This truncates and allows read.

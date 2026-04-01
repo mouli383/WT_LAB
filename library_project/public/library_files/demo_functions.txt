@@ -1,0 +1,4 @@
+Library Demo File
+Created on: 10 Mar 2026 18:19:21
+Sample book: The Pragmatic Programmer
+Author: David Thomas, Andrew Hunt
